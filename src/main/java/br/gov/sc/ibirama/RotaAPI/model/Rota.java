@@ -23,21 +23,137 @@ public class Rota implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nomeRua;
-    private String segundaManha;
-    private String segundaTarde;
-    private String tercaManha;
-    private String tercaTarde;
-    private String quartaManha;
-    private String quartaTarde;
-    private String quintaManha;
-    private String quintaTarde;
-    private String sextaManha;
-    private String sextaTarde;
-    private String sabadoManha;
-    private String sabadoTarde;
+    private String nome_rua;
+    private String segunda_manha;
+    private String segunda_tarde;
+    private String terca_manha;
+    private String terca_tarde;
+    private String quarta_manha;
+    private String quarta_tarde;
+    private String quinta_manha;
+    private String quinta_tarde;
+    private String sexta_manha;
+    private String sexta_tarde;
+    private String sabado_manha;
+    private String sabado_tarde;
     private String bairro;
-    private String tipoColeta;
+    private String tipo_coleta;
+
+    public Rota() {
+       
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome_rua() {
+        return nome_rua;
+    }
+
+    public void setNome_rua(String nome_rua) {
+        this.nome_rua = nome_rua;
+    }
+
+    public String getSegunda_manha() {
+        return segunda_manha;
+    }
+
+    public void setSegunda_manha(String segunda_manha) {
+        this.segunda_manha = segunda_manha;
+    }
+
+    public String getSegunda_tarde() {
+        return segunda_tarde;
+    }
+
+    public void setSegunda_tarde(String segunda_tarde) {
+        this.segunda_tarde = segunda_tarde;
+    }
+
+    public String getTerca_manha() {
+        return terca_manha;
+    }
+
+    public void setTerca_manha(String terca_manha) {
+        this.terca_manha = terca_manha;
+    }
+
+    public String getTerca_tarde() {
+        return terca_tarde;
+    }
+
+    public void setTerca_tarde(String terca_tarde) {
+        this.terca_tarde = terca_tarde;
+    }
+
+    public String getQuarta_manha() {
+        return quarta_manha;
+    }
+
+    public void setQuarta_manha(String quarta_manha) {
+        this.quarta_manha = quarta_manha;
+    }
+
+    public String getQuarta_tarde() {
+        return quarta_tarde;
+    }
+
+    public void setQuarta_tarde(String quarta_tarde) {
+        this.quarta_tarde = quarta_tarde;
+    }
+
+    public String getQuinta_manha() {
+        return quinta_manha;
+    }
+
+    public void setQuinta_manha(String quinta_manha) {
+        this.quinta_manha = quinta_manha;
+    }
+
+    public String getQuinta_tarde() {
+        return quinta_tarde;
+    }
+
+    public void setQuinta_tarde(String quinta_tarde) {
+        this.quinta_tarde = quinta_tarde;
+    }
+
+    public String getSexta_manha() {
+        return sexta_manha;
+    }
+
+    public void setSexta_manha(String sexta_manha) {
+        this.sexta_manha = sexta_manha;
+    }
+
+    public String getSexta_tarde() {
+        return sexta_tarde;
+    }
+
+    public void setSexta_tarde(String sexta_tarde) {
+        this.sexta_tarde = sexta_tarde;
+    }
+
+    public String getSabado_manha() {
+        return sabado_manha;
+    }
+
+    public void setSabado_manha(String sabado_manha) {
+        this.sabado_manha = sabado_manha;
+    }
+
+    public String getSabado_tarde() {
+        return sabado_tarde;
+    }
+
+    public void setSabado_tarde(String sabado_tarde) {
+        this.sabado_tarde = sabado_tarde;
+    }
 
     public String getBairro() {
         return bairro;
@@ -47,126 +163,14 @@ public class Rota implements Serializable {
         this.bairro = bairro;
     }
 
-    public String getTipoColeta() {
-        return tipoColeta;
+    public String getTipo_coleta() {
+        return tipo_coleta;
     }
 
-    public void setTipoColeta(String tipoColeta) {
-        this.tipoColeta = tipoColeta;
-    }
-    
-    public String getNomeRua() {
-        return nomeRua;
+    public void setTipo_coleta(String tipo_coleta) {
+        this.tipo_coleta = tipo_coleta;
     }
 
-    public void setNomeRua(String nomeRua) {
-        this.nomeRua = nomeRua;
-    }
-
-    public String getSegundaManha() {
-        return segundaManha;
-    }
-
-    public void setSegundaManha(String segundaManha) {
-        this.segundaManha = segundaManha;
-    }
-
-    public String getSegundaTarde() {
-        return segundaTarde;
-    }
-
-    public void setSegundaTarde(String segundaTarde) {
-        this.segundaTarde = segundaTarde;
-    }
-
-    public String getTercaManha() {
-        return tercaManha;
-    }
-
-    public void setTercaManha(String tercaManha) {
-        this.tercaManha = tercaManha;
-    }
-
-    public String getTercaTarde() {
-        return tercaTarde;
-    }
-
-    public void setTercaTarde(String tercaTarde) {
-        this.tercaTarde = tercaTarde;
-    }
-
-    public String getQuartaManha() {
-        return quartaManha;
-    }
-
-    public void setQuartaManha(String quartaManha) {
-        this.quartaManha = quartaManha;
-    }
-
-    public String getQuartaTarde() {
-        return quartaTarde;
-    }
-
-    public void setQuartaTarde(String quartaTarde) {
-        this.quartaTarde = quartaTarde;
-    }
-
-    public String getQuintaManha() {
-        return quintaManha;
-    }
-
-    public void setQuintaManha(String quintaManha) {
-        this.quintaManha = quintaManha;
-    }
-
-    public String getQuintaTarde() {
-        return quintaTarde;
-    }
-
-    public void setQuintaTarde(String quintaTarde) {
-        this.quintaTarde = quintaTarde;
-    }
-
-    public String getSextaManha() {
-        return sextaManha;
-    }
-
-    public void setSextaManha(String sextaManha) {
-        this.sextaManha = sextaManha;
-    }
-
-    public String getSextaTarde() {
-        return sextaTarde;
-    }
-
-    public void setSextaTarde(String sextaTarde) {
-        this.sextaTarde = sextaTarde;
-    }
-
-    public String getSabadoManha() {
-        return sabadoManha;
-    }
-
-    public void setSabadoManha(String sabadoManha) {
-        this.sabadoManha = sabadoManha;
-    }
-
-    public String getSabadoTarde() {
-        return sabadoTarde;
-    }
-
-    public void setSabadoTarde(String sabadoTarde) {
-        this.sabadoTarde = sabadoTarde;
-    }
-
- 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -190,7 +194,7 @@ public class Rota implements Serializable {
 
     @Override
     public String toString() {
-        return "Rota{" + "id=" + id + ", nomeRua=" + nomeRua + ", segundaManha=" + segundaManha + ", segundaTarde=" + segundaTarde + ", tercaManha=" + tercaManha + ", tercaTarde=" + tercaTarde + ", quartaManha=" + quartaManha + ", quartaTarde=" + quartaTarde + ", quintaManha=" + quintaManha + ", quintaTarde=" + quintaTarde + ", sextaManha=" + sextaManha + ", sextaTarde=" + sextaTarde + ", sabadoManha=" + sabadoManha + ", sabadoTarde=" + sabadoTarde + ", bairro=" + bairro + ", tipoColeta=" + tipoColeta + '}';
+        return "Rota{" + "id=" + id + ", nome_rua=" + nome_rua + ", segunda_manha=" + segunda_manha + ", segunda_tarde=" + segunda_tarde + ", terca_manha=" + terca_manha + ", terca_tarde=" + terca_tarde + ", quarta_manha=" + quarta_manha + ", quarta_tarde=" + quarta_tarde + ", quinta_manha=" + quinta_manha + ", quinta_tarde=" + quinta_tarde + ", sexta_manha=" + sexta_manha + ", sexta_tarde=" + sexta_tarde + ", sabado_manha=" + sabado_manha + ", sabado_tarde=" + sabado_tarde + ", bairro=" + bairro + ", tipo_coleta=" + tipo_coleta + '}';
     }
 
 }
