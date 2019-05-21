@@ -19,7 +19,7 @@ public class RotaApiApplication {
             leitor.lerArquivo(url);
         } catch (IOException ex) {
             Logger.getLogger(RotaApiApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
+}
 }

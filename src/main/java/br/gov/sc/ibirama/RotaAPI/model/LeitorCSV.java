@@ -26,19 +26,11 @@ import javax.persistence.Persistence;
 public class LeitorCSV {
 
     public void lerArquivo(String url) throws IOException {
-
-        Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(url));
         CSVReader csvReader = new CSVReaderBuilder(reader)
                 .withSkipLines(1)//para o caso do CSV ter cabeçalho.
                 .build();
-
         List<String[]> linhas = csvReader.readAll();
-        List<String> listaJson;
-
-        String[] colunas = null;
-
-//        String json = gson.toJson(linha);
         for (String[] linha : linhas) {
             Rota rotaNova = new Rota();
             rotaNova.setId(Long.parseLong(linha[0]));
@@ -62,24 +54,18 @@ public class LeitorCSV {
     }
 
     public void salvarRotasNovas(Rota novaRota) {
-  
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("br.gov.sc.ibirama_RotaAPI_jar_0.0.1-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         try {
-
             em.persist(novaRota);
             em.getTransaction().commit();
             System.out.println(novaRota.toString());
-
         } catch (Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
         } finally {
-
             em.close();
-
         }
     }
 }
