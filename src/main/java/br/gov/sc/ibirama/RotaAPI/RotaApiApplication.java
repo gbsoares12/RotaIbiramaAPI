@@ -13,7 +13,7 @@ public class RotaApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(RotaApiApplication.class, args);
 
-        String url = "C:\\Users\\Gabriel Soares\\Desktop\\falculdade\\Bolsa\\rota.csv";
+        String url = "C:\\Users\\42519630833\\Desktop\\Projetos Bolsa\\FrontEnd\\rotas.csv";
         LeitorCSV leitor = new LeitorCSV();
         try {
             leitor.lerArquivo(url);
