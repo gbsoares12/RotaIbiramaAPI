@@ -5,6 +5,7 @@
  */
 package br.gov.sc.ibirama.RotaAPI.model;
 
+import br.gov.sc.ibirama.RotaAPI.repositorio.RotaRepositorio;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -22,49 +24,63 @@ import javax.persistence.Persistence;
 public class LeitorCSV {
 
     public void lerArquivo(String url) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(url), "ISO-8859-1"));
-        
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(url), "UTF-8"));
+
         String linha;
         String dados[];
         ArrayList<String[]> dadosCSV = new ArrayList<>();
-        
+
         while ((linha = br.readLine()) != null) {
             dados = linha.split(";");
             dadosCSV.add(dados);
         }
+
+        dadosCSV.remove(0); // Remove o cabeçalho
+
         for (String[] linhas : dadosCSV) {
-            for (String colunas : linhas) {
-                //Aqui estão todas as informações dentro das colunas separadasa por ";";
-                System.out.println("Colunas: " + colunas);
-            }
+
+            Rota rotaNova = new Rota();
+            rotaNova.setId(Long.parseLong(linhas[0]));
+            rotaNova.setBairro(linhas[1]);
+            rotaNova.setNome_rua(linhas[2]);
+            rotaNova.setSegunda_manha(linhas[3]);
+            rotaNova.setSegunda_tarde(linhas[4]);
+            rotaNova.setTerca_manha(linhas[5]);
+            rotaNova.setTerca_tarde(linhas[6]);
+            rotaNova.setQuarta_manha(linhas[7]);
+            rotaNova.setQuarta_tarde(linhas[8]);
+            rotaNova.setQuinta_manha(linhas[9]);
+            rotaNova.setQuinta_tarde(linhas[10]);
+            rotaNova.setSexta_manha(linhas[11]);
+            rotaNova.setSexta_tarde(linhas[12]);
+            rotaNova.setSabado_manha(linhas[13]);
+            rotaNova.setSabado_tarde(linhas[14]);
+            rotaNova.setTipo_coleta(linhas[15]);
+            salvarRotasNovas(rotaNova);
         }
-        
         br.close();
-//        for (String[] linha : linhas) {
-//            Rota rotaNova = new Rota();
-//            rotaNova.setId(Long.parseLong(linha[0]));
-//            rotaNova.setNome_rua(linha[2]);
-//            rotaNova.setSegunda_manha(linha[9]);
-//            rotaNova.setSegunda_tarde(linha[10]);
-//            rotaNova.setTerca_manha(linha[13]);
-//            rotaNova.setTerca_tarde(linha[14]);
-//            rotaNova.setQuarta_manha(linha[3]);
-//            rotaNova.setQuarta_tarde(linha[4]);
-//            rotaNova.setQuinta_manha(linha[5]);
-//            rotaNova.setQuinta_tarde(linha[6]);
-//            rotaNova.setSexta_manha(linha[11]);
-//            rotaNova.setSexta_tarde(linha[12]);
-//            rotaNova.setSabado_manha(linha[7]);
-//            rotaNova.setSabado_tarde(linha[8]);
-//            rotaNova.setBairro(linha[1]);
-//            rotaNova.setTipo_coleta(linha[15]);
-//            salvarRotasNovas(rotaNova);
-//        }
+    }
+
+    public void limparTabela() {
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("br.gov.sc.ibirama_RotaAPI_jar_0.0.1-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            em.createQuery("DELETE * FROM Rota;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     public void salvarRotasNovas(Rota novaRota) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("br.gov.sc.ibirama_RotaAPI_jar_0.0.1-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
+
         em.getTransaction().begin();
         try {
             em.persist(novaRota);

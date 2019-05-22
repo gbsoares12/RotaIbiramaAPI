@@ -6,14 +6,25 @@
 package br.gov.sc.ibirama.RotaAPI.resources;
 
 import br.gov.sc.ibirama.RotaAPI.model.LeitorCSV;
+import br.gov.sc.ibirama.RotaAPI.repositorio.RotaRepositorio;
+import br.gov.sc.ibirama.RotaAPI.responseUpload.UploadFileResponse;
+import br.gov.sc.ibirama.RotaAPI.service.FileStorageService;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  *
@@ -23,16 +34,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/upload")
 public class UploadResource {
+
+    @Autowired
+    private FileStorageService fileStorageService;
     
+    @Autowired
+    private RotaRepositorio rr;
     
-    @PostMapping("/{file}")
-    public void salvar(@PathVariable File arquivo) {
-        System.out.println(arquivo);
-   // LeitorCSV gravarArquivo = new LeitorCSV();
-   // gravarArquivo.lerArquivo(arquivo);
-    }
-    
-    public void receberArquivo(){
+    @PostMapping
+    public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
+        System.out.println("@@@@@@@@@~ENTROU~@@@@@@@@@");
+        String fileName = fileStorageService.storeFile(file);
+        LeitorCSV leitor = new LeitorCSV();
+        try {
+            rr.deleteAll();
+            leitor.lerArquivo("./uploads/"+fileName);
+        } catch (IOException ex) {
+            Logger.getLogger(UploadResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        return new ResponseEntity<>(
+                new UploadFileResponse(fileName, file.getContentType(), file.getSize()),
+                HttpStatus.OK);
     }
 }

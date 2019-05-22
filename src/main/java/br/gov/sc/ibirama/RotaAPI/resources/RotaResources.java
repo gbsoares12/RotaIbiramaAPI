@@ -28,20 +28,12 @@ public class RotaResources {
 
     @Autowired
     private RotaRepositorio rr;
-
-    @GetMapping("/{id}")
-    public Rota buscar(@PathVariable long id) {
-        return rr.findById(id).get();
-    }
     
     @CrossOrigin
     @GetMapping
     public List<Rota> buscar() {
         return rr.findAll();
     }
-
-    @PostMapping
-    public Rota salvar(@RequestBody Rota rota) {
-        return rr.save(rota);
-    }
+    
+    
 }

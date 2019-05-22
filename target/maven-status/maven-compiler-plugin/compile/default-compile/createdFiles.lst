@@ -1,8 +1,0 @@
-br\gov\sc\ibirama\RotaAPI\model\Rota.class
-br\gov\sc\ibirama\RotaAPI\repositorio\RotaRepositorio.class
-br\gov\sc\ibirama\RotaAPI\model\Rota_.class
-br\gov\sc\ibirama\RotaAPI\RotaApiApplication.class
-br\gov\sc\ibirama\RotaAPI\resources\UploadResource.class
-br\gov\sc\ibirama\RotaAPI\configuration\CORSFilter.class
-br\gov\sc\ibirama\RotaAPI\resources\RotaResources.class
-br\gov\sc\ibirama\RotaAPI\model\LeitorCSV.class
