@@ -46,7 +46,7 @@ public class RotaResources {
             return rr.buscarRotaPelaRua(rua);
         }
         if ((rua != null && bairro != null) && !rua.equals("") && !bairro.equals("") && !tipoColeta.equalsIgnoreCase("undefined")) {
-            return rr.buscarRotaPeloBairroRuaColeta(rua, bairro, tipoColeta);
+            return rr.buscarRotaPeloBairroRuaColeta(bairro, rua, tipoColeta);
         }
         if ((rua != null && bairro != null) && !rua.equals("") && bairro.equals("") && !tipoColeta.equalsIgnoreCase("undefined")) {
             return rr.buscarRotaPelaRuaEColeta(rua, tipoColeta);

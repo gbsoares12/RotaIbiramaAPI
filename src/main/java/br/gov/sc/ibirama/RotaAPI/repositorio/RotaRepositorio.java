@@ -26,13 +26,13 @@ public interface RotaRepositorio extends JpaRepository<Rota, Long> {
     @Query(value = "SELECT r.* FROM Rota r WHERE r.bairro ~* :bairro AND r.nome_rua ~* :rua", nativeQuery = true)
     List<Rota> buscarRotaPeloBairroERua(@Param("bairro") String bairro, @Param("rua") String rua);
     
-    @Query(value = "SELECT r.* FROM Rota r WHERE r.bairro ~* :bairro AND r.nome_rua ~* :rua AND r.tipo_coleta = :coleta", nativeQuery = true)
+    @Query(value = "SELECT r.* FROM Rota r WHERE r.bairro ~* :bairro AND r.nome_rua ~* :rua AND r.tipo_coleta ~* :coleta", nativeQuery = true)
     List<Rota> buscarRotaPeloBairroRuaColeta(@Param("bairro") String bairro, @Param("rua") String rua, @Param("coleta") String coleta);
     
-    @Query(value = "SELECT r.* FROM Rota r WHERE r.bairro ~* :bairro AND r.tipo_coleta = :coleta", nativeQuery = true)
+    @Query(value = "SELECT r.* FROM Rota r WHERE r.bairro ~* :bairro AND r.tipo_coleta ~* :coleta", nativeQuery = true)
     List<Rota> buscarRotaPeloBairroEColeta(@Param("bairro") String bairro, @Param("coleta") String coleta);
     
-    @Query(value = "SELECT r.* FROM Rota r WHERE r.nome_rua ~* :rua AND r.tipo_coleta = :coleta", nativeQuery = true)
+    @Query(value = "SELECT r.* FROM Rota r WHERE r.nome_rua ~* :rua AND r.tipo_coleta ~* :coleta", nativeQuery = true)
     List<Rota> buscarRotaPelaRuaEColeta(@Param("rua") String rua, @Param("coleta") String coleta);
     
     @Query(value = "SELECT r.* FROM Rota r WHERE r.tipo_coleta ~* :coleta", nativeQuery = true)
