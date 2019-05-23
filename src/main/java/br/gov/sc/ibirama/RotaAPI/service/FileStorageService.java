@@ -1,5 +1,6 @@
 package br.gov.sc.ibirama.RotaAPI.service;
 
+import br.gov.sc.ibirama.RotaAPI.exception.FileStorageException;
 import br.gov.sc.ibirama.RotaAPI.exception.MyFileNotFoundException;
 import br.gov.sc.ibirama.RotaAPI.property.FileStorageProperties;
 import java.io.IOException;

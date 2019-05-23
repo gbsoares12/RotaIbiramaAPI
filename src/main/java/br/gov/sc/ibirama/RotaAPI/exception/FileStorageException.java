@@ -1,4 +1,4 @@
-package com.file.upload_and_download.exception;
+package br.gov.sc.ibirama.RotaAPI.exception;
 
 public class FileStorageException extends RuntimeException {
 

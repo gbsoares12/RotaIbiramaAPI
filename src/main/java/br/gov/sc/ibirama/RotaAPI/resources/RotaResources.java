@@ -11,10 +11,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,12 +26,38 @@ public class RotaResources {
 
     @Autowired
     private RotaRepositorio rr;
-    
-    @CrossOrigin
+
     @GetMapping
-    public List<Rota> buscar() {
+    public List<Rota> find() {
         return rr.findAll();
     }
-    
-    
+
+    @CrossOrigin
+    @GetMapping("/filter")
+    public List<Rota> findSingleFilter(@RequestParam(name = "rua", required = false) String rua, @RequestParam(name = "bairro", required = false) String bairro, @RequestParam(name = "coleta", required = false) String tipoColeta) {
+
+        if ((rua != null && bairro != null) && (!rua.equals("") && !bairro.equals("") && tipoColeta.equalsIgnoreCase("undefined"))) {
+            return rr.buscarRotaPeloBairroERua(bairro, rua);
+        }
+        if ((rua != null && bairro != null) && rua.equals("") && !bairro.equals("") && tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPeloBairro(bairro);
+        }
+        if ((rua != null && bairro != null) && !rua.equals("") && bairro.equals("") && tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPelaRua(rua);
+        }
+        if ((rua != null && bairro != null) && !rua.equals("") && !bairro.equals("") && !tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPeloBairroRuaColeta(rua, bairro, tipoColeta);
+        }
+        if ((rua != null && bairro != null) && !rua.equals("") && bairro.equals("") && !tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPelaRuaEColeta(rua, tipoColeta);
+        }
+        if ((rua != null && bairro != null) && rua.equals("") && !bairro.equals("") && !tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPeloBairroEColeta(bairro, tipoColeta);
+        }
+        if ((tipoColeta != null) && !tipoColeta.equalsIgnoreCase("undefined")) {
+            return rr.buscarRotaPelaColeta(tipoColeta);
+        }
+        return null;
+    }
+
 }

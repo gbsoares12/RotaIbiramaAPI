@@ -43,16 +43,12 @@ public class UploadResource {
     
     @PostMapping
     public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
-        System.out.println("@@@@@@@@@~ENTROU~@@@@@@@@@");
+       
         String fileName = fileStorageService.storeFile(file);
         LeitorCSV leitor = new LeitorCSV();
-        try {
+        if(leitor.lerArquivo("./uploads/"+fileName)){
             rr.deleteAll();
-            leitor.lerArquivo("./uploads/"+fileName);
-        } catch (IOException ex) {
-            Logger.getLogger(UploadResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return new ResponseEntity<>(
                 new UploadFileResponse(fileName, file.getContentType(), file.getSize()),
                 HttpStatus.OK);
