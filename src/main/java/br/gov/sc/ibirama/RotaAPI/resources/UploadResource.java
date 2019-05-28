@@ -6,6 +6,7 @@
 package br.gov.sc.ibirama.RotaAPI.resources;
 
 import br.gov.sc.ibirama.RotaAPI.model.LeitorCSV;
+import br.gov.sc.ibirama.RotaAPI.model.User;
 import br.gov.sc.ibirama.RotaAPI.repositorio.RotaRepositorio;
 import br.gov.sc.ibirama.RotaAPI.responseUpload.UploadFileResponse;
 import br.gov.sc.ibirama.RotaAPI.service.FileStorageService;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,23 +32,32 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  *
  * @author Gabriel Soares
  */
-@CrossOrigin(origins = "http://localhost:4200") //Configura o crossOrigin, libera o bloqueio do header
+@CrossOrigin()
 @RestController
 @RequestMapping("/upload")
 public class UploadResource {
 
     @Autowired
     private FileStorageService fileStorageService;
-    
+
     @Autowired
     private RotaRepositorio rr;
-    
+
+    @GetMapping(produces = "application/json")
+    @RequestMapping("/validateLogin")
+    public ResponseEntity<User> validateLogin() {
+
+        return new ResponseEntity<>(
+                new User("User successfully authenticated"),
+                HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
-       
+
         String fileName = fileStorageService.storeFile(file);
         LeitorCSV leitor = new LeitorCSV();
-        if(leitor.lerArquivo("./uploads/"+fileName)){
+        if (leitor.lerArquivo("./uploads/" + fileName)) {
             rr.deleteAll();
         }
         return new ResponseEntity<>(

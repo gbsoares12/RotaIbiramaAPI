@@ -1,7 +1,9 @@
 package br.gov.sc.ibirama.RotaAPI.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,9 +26,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ibiramaPrefeitura").password(passwordEncoder().encode("prefeituraIbirama2019psw")).roles("ADMIN");
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+       auth.inMemoryAuthentication().withUser("ibiramaPrefeitura").password("{noop}prefeituraIbirama2019psw").roles("USER");
+        //auth.inMemoryAuthentication().withUser("ibiramaPrefeitura").password(passwordEncoder().encode("prefeituraIbirama2019psw")).roles("USER");
     }
 
     @Override
@@ -34,15 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/rotasIbirama").permitAll()
                 .antMatchers("/rotasIbirama/filter").permitAll()
-                .antMatchers("/upload").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/upload").permitAll().anyRequest().authenticated()
                 .anyRequest().authenticated()
                 .and().httpBasic()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
     }
 
-    @Bean
-    static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    static PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
