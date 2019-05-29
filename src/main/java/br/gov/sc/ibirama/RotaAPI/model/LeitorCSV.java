@@ -32,7 +32,7 @@ public class LeitorCSV {
             dadosCSV.remove(0); // Remove o cabeçalho
             for (String[] linhas : dadosCSV) {
                 Rota rotaNova = new Rota();
-                rotaNova.setId(Long.parseLong(linhas[0]));
+//                rotaNova.setId(Long.parseLong(linhas[0]));
                 rotaNova.setBairro(linhas[1]);
                 rotaNova.setNome_rua(linhas[2]);
                 rotaNova.setSegunda_manha(linhas[3]);
