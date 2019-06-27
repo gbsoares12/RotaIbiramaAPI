@@ -60,4 +60,10 @@ public class RotaResources {
         return null;
     }
 
+    @CrossOrigin
+    @GetMapping("/bairros")
+    public List<Rota> buscarBairro() {
+        return rr.buscarBairros();
+    }
+
 }

@@ -21,7 +21,7 @@ public class LeitorCSV {
 
     public boolean lerArquivo(String url) {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(url), "UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(url), "UTF8"));
             String linha;
             String dados[];
             ArrayList<String[]> dadosCSV = new ArrayList<>();

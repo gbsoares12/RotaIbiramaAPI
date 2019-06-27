@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().
                 authorizeRequests().antMatchers("/rotasIbirama").permitAll()
                 .antMatchers("/rotasIbirama/filter").permitAll()
+                .antMatchers("/rotasIbirama/bairros").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/upload").permitAll().anyRequest().authenticated()
                 .and().httpBasic();
     }

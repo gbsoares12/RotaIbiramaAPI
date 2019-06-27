@@ -38,5 +38,9 @@ public interface RotaRepositorio extends JpaRepository<Rota, Long> {
     @Query(value = "SELECT r.* FROM Rota r WHERE r.tipo_coleta ~* :coleta", nativeQuery = true)
     List<Rota> buscarRotaPelaColeta(@Param("coleta") String coleta);
 
+    @Query(value = "SELECT DISTINCT(r.bairro) FROM Rota r", nativeQuery = true)
+    List<Rota> buscarBairros();
+
+    
     
 }
